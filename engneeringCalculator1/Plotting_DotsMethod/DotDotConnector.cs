@@ -166,25 +166,42 @@ namespace engneeringCalculator1.Plotting_DotsMethod
             // Ax=B 를 푸는 코드
             // A는 입력값의 모노미얼 메트릭스, B는 y값, x는 폴리노미얼의 계수
             // A에는 조까튼 입력을 하지 않았다고 가정, 예외처리는 앞에서 구현하자.
-            double[,] XnsMat = new double[PtnNum,PtnNum]; //방가ㅏㅋㅋㅋ  하이하
-            double[] YnsVec = (double[])ycor.Clone();// 다른 파일들 보임? // 카톡으로 보냄
-            // A 만들기
-            for (int i = 0; i< PtnNum; i++)
+            double[,] XnsMat = new double[PtnNum,PtnNum]; 
+            double[] YnsVec = (double[])ycor.Clone();
+            if (checkBox2.Checked == true)
             {
-                for (int j = 0; j< PtnNum; j++)
+                // A 만들기
+                for (int i = 0; i < PtnNum; i++)
                 {
-                    XnsMat[i, j] = Math.Pow(xcor[i], j);
+                    for (int j = 0; j < PtnNum; j++)
+                    {
+                        XnsMat[i, j] = Math.Pow(xcor[i], j);
+                    }
                 }
+                // LU fac으로 x 구하기
+                double[] Coeff_Vec = new double[PtnNum];
+                Coeff_Vec = PointCalMethods.SolveLinear(XnsMat, YnsVec);
+                // 이제 ysArr 구하기
+                for (int i = 0; i < dotnum; i++)
+                {
+                    ysArr[i] = 0;
+                    for (int k = 0; k < PtnNum; k++)
+                    {
+                        ysArr[i] += Coeff_Vec[k] * Math.Pow(xsArr[i], k);
+                    }
+                }
+
+                polyLine = plot1.Plot.AddScatterLines(xsArr, ysArr, Color.Red, 2);
+                plot1.Plot.Legend();
+                plot1.Refresh();
             }
-            // LU fac으로 x 구하기
-            double[] Coeff_Vec = new double[PtnNum];
-            Coeff_Vec = PointCalMethods.SolveLinear(XnsMat, YnsVec);
-            // 이제 ysArr 구하기
-            for (int i = 0; i< dotnum; i++)
+
+            else
             {
-
+                plot1.Plot.Remove(polyLine);
+                plot1.Plot.Legend();
+                plot1.Refresh();
             }
-
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
