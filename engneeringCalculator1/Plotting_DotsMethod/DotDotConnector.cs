@@ -166,8 +166,8 @@ namespace engneeringCalculator1.Plotting_DotsMethod
             // Ax=B 를 푸는 코드
             // A는 입력값의 모노미얼 메트릭스, B는 y값, x는 폴리노미얼의 계수
             // A에는 조까튼 입력을 하지 않았다고 가정, 예외처리는 앞에서 구현하자.
-            double[,] XnsMat = new double[PtnNum,PtnNum]; //방가ㅏㅋㅋㅋ  하이하
-            double[] YnsVec = (double[])ycor.Clone();// 다른 파일들 보임? // 카톡으로 보냄
+            double[,] XnsMat = new double[PtnNum,PtnNum]; 
+            double[] YnsVec = (double[])ycor.Clone();
             // A 만들기
             for (int i = 0; i< PtnNum; i++)
             {
@@ -182,7 +182,7 @@ namespace engneeringCalculator1.Plotting_DotsMethod
             // 이제 ysArr 구하기
             for (int i = 0; i< dotnum; i++)
             {
-
+			
             }
 
         }
