@@ -184,18 +184,9 @@ namespace engneeringCalculator1.Plotting_DotsMethod
                 // 이제 ysArr 구하기
                 for (int i = 0; i < dotnum; i++)
                 {
-                    ysArr[i] = 0;
-                    for (int k = 0; k < PtnNum; k++)
-                    {
-                        ysArr[i] += Coeff_Vec[k] * Math.Pow(xsArr[i], k);
+
                 }
             }
-
-                polyLine = plot1.Plot.AddScatterLines(xsArr, ysArr, Color.Red, 2);
-                plot1.Plot.Legend();
-                plot1.Refresh();
-            }
-
             else
             {
                 plot1.Plot.Remove(polyLine);
